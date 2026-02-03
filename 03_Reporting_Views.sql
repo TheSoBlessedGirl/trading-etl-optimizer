@@ -26,3 +26,23 @@ GO
 
 SELECT * FROM vw_DailySecurityPerformance
 ORDER BY TradeDate DESC, TotalMarketValue DESC;
+
+
+CREATE OR ALTER FUNCTION fn_Get_Trade_Volume_For_Security(@Ticker VARCHAR(10))
+RETURNS INT
+AS
+BEGIN
+    DECLARE @TotalVolume INT;
+
+    SELECT @TotalVolume = SUM(F.TradeVolume)
+    FROM Fact_Trades F
+    JOIN Dim_Security S ON F.SecurityID = S.SecurityID
+    WHERE S.Ticker = @Ticker;
+
+    RETURN ISNULL(@TotalVolume, 0);
+END;
+GO
+
+SELECT dbo.fn_Get_Trade_Volume_For_Security('AAPL') AS AppleVolume;
+SELECT dbo.fn_Get_Trade_Volume_For_Security('GOOGL') AS GoogleVolume;
+SELECT dbo.fn_Get_Trade_Volume_For_Security('MSFT') AS MicrosoftVolume;
