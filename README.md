@@ -1,6 +1,4 @@
-# trading-etl-optimizer
-End-to-end SQL ETL pipeline for high-volume financial trading data.
-# High-Volume Trading ETL & Data Optimizer
+# End-to-end High-Volume Trading ETL & Data Optimizer
 
 ## 📌 Project Overview
 This project simulates a real-world FinTech data pipeline. It takes "messy" raw trading data (simulated via Python/Yahoo Finance), cleans it using SQL Server (T-SQL), and transforms it into a production-ready analytical format.
